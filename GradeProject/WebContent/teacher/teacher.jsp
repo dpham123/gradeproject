@@ -22,7 +22,7 @@
 		<tbody>
 			<c:forEach items="${classes}" var="studentclass">
 				<tr>
-					<td><a href="TeacherController?action=view&className=<c:out value="${studentclass.className}"/>&teacherID=<c:out value="${studentclass.teacherID}"/>">
+					<td><a href="TeacherController?action=viewAssignments&className=<c:out value="${studentclass.className}"/>&teacherID=<c:out value="${studentclass.teacherID}"/>">
 					<c:out value="${studentclass.className}"/></a></td>
 				</tr>
 			</c:forEach>

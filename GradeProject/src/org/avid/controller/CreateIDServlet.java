@@ -33,6 +33,8 @@ public class CreateIDServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		String button1 = request.getParameter("Create New ID");
+		String firstName = request.getParameter("firstname");
+		String lastName = request.getParameter("lastname");
 		String p = request.getParameter("userpass");
 		String r = request.getParameter("role");
 		
@@ -44,7 +46,7 @@ public class CreateIDServlet extends HttpServlet {
 				return;
 			}
 			
-			String username = LoginDao.createID(p, r);
+			String username = LoginDao.createID(firstName, lastName, p, r);
 			RequestDispatcher rd = request.getRequestDispatcher("admin/admin.html");
 			rd.include(request,response);
 			out.printf("<p style=\"color:green;\">User created! Your user id is %s</p>", username);

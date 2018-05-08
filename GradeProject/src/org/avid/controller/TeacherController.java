@@ -33,6 +33,7 @@ public class TeacherController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String forward = "teacher/teacher.jsp";
 		String action = request.getParameter("action");
+		PrintWriter out = response.getWriter();
 		
 		
 		if (action == null) {
@@ -40,19 +41,26 @@ public class TeacherController extends HttpServlet {
 			request.setAttribute("classes", LoginDao.getClasses(teacherID, User.TEACHER));
 			RequestDispatcher view = request.getRequestDispatcher(forward);
 			view.forward(request, response);
-		} else {
+		} else if (action.equals("viewAssignments")) {
 			String teacherID = request.getParameter("teacherID");
 			String className = request.getParameter("className");
-			PrintWriter out = response.getWriter();
 			forward = "teacher/classGrades.jsp";
 			
-			request.setAttribute("students", LoginDao.getStudents(teacherID, className));
+			request.setAttribute("assignments", LoginDao.getAssignments(teacherID, className, User.TEACHER));
 			out.printf("<h1>%s</h1>", className);
 			RequestDispatcher view = request.getRequestDispatcher(forward);
 			view.include(request, response);
+			
+		} else {
+			String teacherID = request.getParameter("teacherID");
+			String assignmentName = request.getParameter("assignmentName");
+			forward = "teacher/classAssignments.jsp";
+			
+			request.setAttribute("students", LoginDao.getStudents(teacherID, assignmentName));
+			out.printf("<h1>%s</h1>", assignmentName);
+			RequestDispatcher view = request.getRequestDispatcher(forward);
+			view.include(request, response);
 		}
-		
-		
 	}
 
 	/**

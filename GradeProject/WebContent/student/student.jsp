@@ -23,8 +23,8 @@
 		<tbody>
 			<c:forEach items="${classes}" var="studentclass">
 				<tr>
-					<td><c:out value="${studentclass.className}" /></td>
-					<td><c:out value="${studentclass.grade}" /></td>
+					<td align="center"><c:out value="${studentclass.className}" /></td>
+					<td align="center"><c:out value="${studentclass.grade}" /></td>
 				</tr>
 			</c:forEach>
 		</tbody>

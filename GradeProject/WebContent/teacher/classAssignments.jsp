@@ -14,15 +14,16 @@
 	<table style='font-family:"Times New Roman", Times New Roman, monospace; font-size:200%' border=1>
 		<thead>
 			<tr>
-				<th>Assignment</th>
+				<th>Student ID</th>
+				<th>Grade</th>
 			</tr>
 		</thead>
 
 		<tbody>
-			<c:forEach items="${assignments}" var="assignment">
+			<c:forEach items="${students}" var="student">
 				<tr>
-					<td><a href="TeacherController?action=viewStudents&assignmentName=<c:out value="${assignment.name}"/>&teacherID=<c:out value="${assignment.teacherID}"/>">
-					<c:out value="${assignment.name}"/></a></td>
+					<td align="center"><c:out value="${student.studentID}" /></td>
+					<td align="center"><c:out value="${student.grade}" /></td>
 				</tr>
 			</c:forEach>
 		</tbody>

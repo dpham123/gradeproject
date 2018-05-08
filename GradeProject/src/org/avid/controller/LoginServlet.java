@@ -23,14 +23,18 @@ public class LoginServlet extends HttpServlet {
 		
 		String[] data = LoginDao.retrieveUserData(n);
 		
+		// The username doesn't exist in the database
 		if (data[0] == null) {
 			RequestDispatcher rd = request.getRequestDispatcher("index.html");
 			rd.include(request,response);
 			out.print("<p style=\"color:red;\">Incorrect username or password</p>");
 			return;
 		}
-
+		
+		// Encrypts the password and checks with password in database
 		if(data[0].equals(Encryptor.encrypt(p))){
+			
+			// Checks the role of the user
 			if (data[1].equals("admin")){
 				RequestDispatcher rd = request.getRequestDispatcher("admin/admin.html");
 				rd.forward(request,response);
@@ -42,6 +46,7 @@ public class LoginServlet extends HttpServlet {
 				rd.forward(request,response);
 			}
 			
+		// Incorrect password	
 		} else {
 			RequestDispatcher rd = request.getRequestDispatcher("index.html");
 			rd.include(request,response);
